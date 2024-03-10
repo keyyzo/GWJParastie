@@ -13,3 +13,7 @@ res://Scripts/Player/WalkingPlayerState.gd
 res://Scripts/Player/RunningPlayerState.gd
 res://UI/debug.tres
 res://Scripts/debug.gd
+res://Scenes/gun.tscn
+res://Scripts/gun.gd
+res://Scenes/rockium.tscn
+res://Scripts/rockium.gd
