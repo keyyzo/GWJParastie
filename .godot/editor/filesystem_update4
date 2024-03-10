@@ -1,0 +1,15 @@
+res://godot_resource_groups_examples/image_resource_group.tres
+res://godot_resource_groups_examples/one_thousand_images.tres
+res://Scenes/player.tscn
+res://Scenes/level.tscn
+res://Scenes/player_controller.gd
+res://Scripts/Player/player_controller.gd
+res://Scripts/Player/PlayerStateMachine.gd
+res://Scripts/state.gd
+res://Scripts/global.gd
+res://Scripts/Player/IdlePlayerState.gd
+res://Scripts/Player/PlayerMovementState.gd
+res://Scripts/Player/WalkingPlayerState.gd
+res://Scripts/Player/RunningPlayerState.gd
+res://UI/debug.tres
+res://Scripts/debug.gd
