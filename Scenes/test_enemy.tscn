@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://cjshm8l61fuaa"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy/test_enemy_controller.gd" id="1_0d7oq"]
+[ext_resource type="Texture2D" uid="uid://173c807gheeg" path="res://Sprites/cute_evil_enemy.png" id="1_fh42w"]
+[ext_resource type="Script" path="res://Scripts/Enemy/TestEnemyStateMachine.gd" id="3_grgtt"]
+[ext_resource type="Script" path="res://Scripts/Enemy/IdleState.gd" id="4_g462i"]
+[ext_resource type="Script" path="res://Scripts/Enemy/ChaseState.gd" id="5_5dimq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v7d8g"]
+radius = 11.2944
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0a4pn"]
+radius = 522.188
+
+[node name="TestEnemy" type="CharacterBody2D" node_paths=PackedStringArray("AREA_OF_DETECTION", "RADIUS_OF_DETECTION") groups=["test_enemy"]]
+collision_layer = 4
+collision_mask = 9
+script = ExtResource("1_0d7oq")
+AREA_OF_DETECTION = NodePath("DetectionArea")
+RADIUS_OF_DETECTION = NodePath("DetectionArea/CollisionShape2D")
+RADIUS_OF_DETECTION_SIZE = 250.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 25)
+scale = Vector2(4, 4)
+shape = SubResource("CircleShape2D_v7d8g")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_fh42w")
+
+[node name="TestEnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("CURRENT_STATE")]
+script = ExtResource("3_grgtt")
+CURRENT_STATE = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="TestEnemyStateMachine" node_paths=PackedStringArray("RANDOM_MOVE_TIMER")]
+script = ExtResource("4_g462i")
+RANDOM_MOVE_TIMER = NodePath("RandomMoveTimer")
+
+[node name="RandomMoveTimer" type="Timer" parent="TestEnemyStateMachine/IdleState"]
+
+[node name="ChaseState" type="Node" parent="TestEnemyStateMachine"]
+script = ExtResource("5_5dimq")
+
+[node name="AttackState" type="Node" parent="TestEnemyStateMachine"]
+
+[node name="DeadState" type="Node" parent="TestEnemyStateMachine"]
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(1, 1)
+shape = SubResource("CircleShape2D_0a4pn")
+
+[connection signal="timeout" from="TestEnemyStateMachine/IdleState/RandomMoveTimer" to="TestEnemyStateMachine/IdleState" method="_on_random_move_timer_timeout"]
+[connection signal="body_entered" from="DetectionArea" to="TestEnemyStateMachine/IdleState" method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="TestEnemyStateMachine/ChaseState" method="_on_detection_area_body_exited"]

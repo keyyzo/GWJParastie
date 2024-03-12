@@ -4,9 +4,9 @@ extends CharacterBody2D
 
 # General Player variables
 
-@export var SPEED_DEFAULT : float = 400.0
-@export var ACCELERATION_RATE : float = 40.0
-@export var DECELERATION_RATE : float = 60.0
+@export var SPEED_DEFAULT : float = 200.0
+@export var ACCELERATION_RATE : float = 30.0
+@export var DECELERATION_RATE : float = 45.0
 @export var FRICTION : float = 10.0
 
 @export var ROTATION_SPEED = 0.08

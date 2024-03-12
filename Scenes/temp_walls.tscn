@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://h7d538nsqnfy"]
+
+[ext_resource type="Script" path="res://Scripts/temp_walls.gd" id="1_577t3"]
+[ext_resource type="Texture2D" uid="uid://xqfpxdb0n6kx" path="res://icon.svg" id="1_l1dws"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_afefv"]
+size = Vector2(128, 127)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_54rw6"]
+size = Vector2(136, 135)
+
+[node name="TempWalls" type="StaticBody2D" groups=["normal_wall"]]
+z_index = 1
+collision_mask = 6
+script = ExtResource("1_577t3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_afefv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_l1dws")
+
+[node name="BulletDetection" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 48
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletDetection"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_54rw6")
+
+[connection signal="body_entered" from="BulletDetection" to="." method="_on_bullet_detection_body_entered"]

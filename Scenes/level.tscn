@@ -1,8 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvvfyk6qi0mbd"]
+[gd_scene load_steps=4 format=3 uid="uid://cvvfyk6qi0mbd"]
 
 [ext_resource type="PackedScene" uid="uid://bvolo3kio7hvp" path="res://Scenes/player.tscn" id="1_r7o8c"]
+[ext_resource type="PackedScene" uid="uid://h7d538nsqnfy" path="res://Scenes/temp_walls.tscn" id="1_y21ek"]
+[ext_resource type="PackedScene" uid="uid://cjshm8l61fuaa" path="res://Scenes/test_enemy.tscn" id="3_usxic"]
 
 [node name="Level" type="Node"]
+
+[node name="TempWalls" parent="." instance=ExtResource("1_y21ek")]
+position = Vector2(0, -1033)
+scale = Vector2(15, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_r7o8c")]
 z_index = 1
@@ -15,3 +21,28 @@ offset_left = -1184.0
 offset_top = -637.0
 offset_right = 1234.0
 offset_bottom = 757.0
+
+[node name="TempWalls2" parent="." instance=ExtResource("1_y21ek")]
+position = Vector2(0, 1029)
+scale = Vector2(15, 1)
+
+[node name="TempWalls3" parent="." instance=ExtResource("1_y21ek")]
+position = Vector2(1676, 55)
+scale = Vector2(1, 10)
+
+[node name="TempWalls4" parent="." instance=ExtResource("1_y21ek")]
+position = Vector2(-1713, 70)
+scale = Vector2(1, 10)
+
+[node name="TempWalls5" parent="." instance=ExtResource("1_y21ek")]
+position = Vector2(-841, 375)
+
+[node name="TempWalls7" parent="." instance=ExtResource("1_y21ek")]
+position = Vector2(579, -431)
+
+[node name="TempWalls6" parent="." instance=ExtResource("1_y21ek")]
+position = Vector2(685, 632)
+
+[node name="TestEnemy" parent="." instance=ExtResource("3_usxic")]
+position = Vector2(-929, -381)
+RADIUS_OF_DETECTION_SIZE = 400.0
