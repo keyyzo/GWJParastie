@@ -12,12 +12,21 @@ extends CharacterBody2D
 @export var ROTATION_SPEED = 0.08
 var mouse_position = Vector2()
 
+# Health and Hurtbox variables
+@export var MAX_HEALTH : int = 100
+@export var DAMAGE_TAKE_RATE : int = 1
+@export var HURTBOX : Area2D
+var current_health : int
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("close"):
 		get_tree().quit()
 
 func _ready() -> void:
 	Global.player = self
+	current_health = MAX_HEALTH
+	%HealthBar.max_value = MAX_HEALTH
+	%HealthBar.value = current_health
 
 func _physics_process(delta: float) -> void:
 	pass
@@ -36,3 +45,9 @@ func update_input(_speed : float, _acceleration : float, _deceleration : float) 
 	
 func update_velocity() -> void:
 	move_and_slide()
+	
+	
+func take_damage(damage_taken : int):
+	current_health -= damage_taken
+	%HealthBar.value = current_health
+	

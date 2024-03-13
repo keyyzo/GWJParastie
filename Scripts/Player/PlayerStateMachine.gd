@@ -23,6 +23,7 @@ func _process(delta: float) -> void:
 	CURRENT_STATE.update(delta)
 	
 	Global.debug.add_property("Current State ",CURRENT_STATE.name,1)
+	Global.debug.add_property("Current Velocity ",Global.player.velocity,2)
 	
 func _physics_process(delta: float) -> void:
 	CURRENT_STATE.physics_update(delta)

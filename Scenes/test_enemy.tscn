@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjshm8l61fuaa"]
+[gd_scene load_steps=13 format=3 uid="uid://cjshm8l61fuaa"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/test_enemy_controller.gd" id="1_0d7oq"]
 [ext_resource type="Texture2D" uid="uid://173c807gheeg" path="res://Sprites/cute_evil_enemy.png" id="1_fh42w"]
 [ext_resource type="Script" path="res://Scripts/Enemy/TestEnemyStateMachine.gd" id="3_grgtt"]
 [ext_resource type="Script" path="res://Scripts/Enemy/IdleState.gd" id="4_g462i"]
 [ext_resource type="Script" path="res://Scripts/Enemy/ChaseState.gd" id="5_5dimq"]
+[ext_resource type="Theme" uid="uid://ci8x0kk14m1ma" path="res://UI/debug.tres" id="6_qlrfv"]
+[ext_resource type="Script" path="res://Scenes/EnemyDebugPanel.gd" id="7_1bd3n"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7d8g"]
 radius = 11.2944
@@ -12,10 +14,29 @@ radius = 11.2944
 [sub_resource type="CircleShape2D" id="CircleShape2D_0a4pn"]
 radius = 522.188
 
-[node name="TestEnemy" type="CharacterBody2D" node_paths=PackedStringArray("AREA_OF_DETECTION", "RADIUS_OF_DETECTION") groups=["test_enemy"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_oloh2"]
+radius = 45.0444
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v313c"]
+bg_color = Color(0.870588, 0, 0.0117647, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_03x8o"]
+bg_color = Color(0.313726, 0.905882, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="TestEnemy" type="CharacterBody2D" node_paths=PackedStringArray("ATTACK_TIMER", "HITBOX", "AREA_OF_DETECTION", "RADIUS_OF_DETECTION") groups=["test_enemy"]]
 collision_layer = 4
 collision_mask = 9
 script = ExtResource("1_0d7oq")
+ATTACK_TIMER = NodePath("EnemyHitBox/AttackTimer")
+HITBOX = NodePath("EnemyHitBox")
 AREA_OF_DETECTION = NodePath("DetectionArea")
 RADIUS_OF_DETECTION = NodePath("DetectionArea/CollisionShape2D")
 RADIUS_OF_DETECTION_SIZE = 250.0
@@ -38,6 +59,7 @@ script = ExtResource("4_g462i")
 RANDOM_MOVE_TIMER = NodePath("RandomMoveTimer")
 
 [node name="RandomMoveTimer" type="Timer" parent="TestEnemyStateMachine/IdleState"]
+one_shot = true
 
 [node name="ChaseState" type="Node" parent="TestEnemyStateMachine"]
 script = ExtResource("5_5dimq")
@@ -54,6 +76,52 @@ collision_mask = 2
 position = Vector2(1, 1)
 shape = SubResource("CircleShape2D_0a4pn")
 
+[node name="DebugUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DebugPanel" type="PanelContainer" parent="DebugUI"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 210.0
+offset_bottom = 50.0
+theme = ExtResource("6_qlrfv")
+script = ExtResource("7_1bd3n")
+
+[node name="MarginContainer" type="MarginContainer" parent="DebugUI/DebugPanel"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DebugUI/DebugPanel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EnemyHitBox" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitBox"]
+position = Vector2(0, 25)
+shape = SubResource("CircleShape2D_oloh2")
+debug_color = Color(0.839216, 0.0470588, 0.113725, 0.419608)
+
+[node name="AttackTimer" type="Timer" parent="EnemyHitBox"]
+
+[node name="EnemyHealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -85.0
+offset_top = -105.0
+offset_right = 85.0
+offset_bottom = -78.0
+theme_override_styles/background = SubResource("StyleBoxFlat_v313c")
+theme_override_styles/fill = SubResource("StyleBoxFlat_03x8o")
+show_percentage = false
+
 [connection signal="timeout" from="TestEnemyStateMachine/IdleState/RandomMoveTimer" to="TestEnemyStateMachine/IdleState" method="_on_random_move_timer_timeout"]
 [connection signal="body_entered" from="DetectionArea" to="TestEnemyStateMachine/IdleState" method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="TestEnemyStateMachine/ChaseState" method="_on_detection_area_body_exited"]
+[connection signal="area_entered" from="EnemyHitBox" to="." method="_on_enemy_hit_box_area_entered"]
+[connection signal="timeout" from="EnemyHitBox/AttackTimer" to="." method="_on_attack_timer_timeout"]

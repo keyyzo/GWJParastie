@@ -73,6 +73,8 @@ close={
 2d_physics/layer_4="LevelObjects"
 2d_physics/layer_5="PlayerAttacks"
 2d_physics/layer_6="EnemyAttacks"
+2d_physics/layer_7="PlayerHurtBox"
+2d_physics/layer_8="EnemyHurtBox"
 
 [rendering]
 

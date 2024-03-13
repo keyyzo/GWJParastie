@@ -1,7 +1,8 @@
-TestEnemyMovementState
 Timer
+ProgressBar
 CollisionShape2D
 Area2D
+TestEnemyMovementState
 State
 Node
 Sprite2D
@@ -11,5 +12,3 @@ RigidBody2D
 Marker2D
 CanvasLayer
 ColorRect
-Camera2D
-VBoxContainer
