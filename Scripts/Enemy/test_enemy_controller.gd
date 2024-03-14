@@ -18,7 +18,7 @@ var can_attack : bool = true
 
 @export var AREA_OF_DETECTION : Area2D
 @export var RADIUS_OF_DETECTION : CollisionShape2D
-@export var RADIUS_OF_DETECTION_SIZE : float = 500.0
+@export var RADIUS_OF_DETECTION_SIZE : float = 1024.0
 
 func _ready() -> void:
 	RADIUS_OF_DETECTION.shape.radius = RADIUS_OF_DETECTION_SIZE

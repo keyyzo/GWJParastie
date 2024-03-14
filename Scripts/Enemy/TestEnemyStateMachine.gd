@@ -22,7 +22,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	CURRENT_STATE.update(delta)
 	
-	Global.enemy_debug.add_property("Current State ",CURRENT_STATE.name,1)
+	
 	
 	
 func _physics_process(delta: float) -> void:

@@ -12,7 +12,7 @@
 radius = 11.2944
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0a4pn"]
-radius = 522.188
+radius = 1024.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oloh2"]
 radius = 45.0444
@@ -39,7 +39,7 @@ ATTACK_TIMER = NodePath("EnemyHitBox/AttackTimer")
 HITBOX = NodePath("EnemyHitBox")
 AREA_OF_DETECTION = NodePath("DetectionArea")
 RADIUS_OF_DETECTION = NodePath("DetectionArea/CollisionShape2D")
-RADIUS_OF_DETECTION_SIZE = 250.0
+RADIUS_OF_DETECTION_SIZE = 2000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 25)

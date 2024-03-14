@@ -1,11 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvvfyk6qi0mbd"]
+[gd_scene load_steps=6 format=3 uid="uid://cvvfyk6qi0mbd"]
 
 [ext_resource type="PackedScene" uid="uid://bvolo3kio7hvp" path="res://Scenes/player.tscn" id="1_r7o8c"]
+[ext_resource type="Script" path="res://Scripts/level.gd" id="1_u05qp"]
 [ext_resource type="PackedScene" uid="uid://h7d538nsqnfy" path="res://Scenes/temp_walls.tscn" id="1_y21ek"]
-[ext_resource type="PackedScene" uid="uid://cjshm8l61fuaa" path="res://Scenes/test_enemy.tscn" id="3_usxic"]
 [ext_resource type="PackedScene" uid="uid://d31m6ub3x43vi" path="res://Scenes/debug_ui.tscn" id="4_rmg4k"]
 
+[sub_resource type="Curve2D" id="Curve2D_j7hsw"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -2186, -1752, 0, 0, 0, 0, 2653.82, -1736.66, 0, 0, 0, 0, 2688, 1432, 0, 0, 0, 0, -2109, 1312, 0, 0, 0, 0, -2186, -1752)
+}
+point_count = 5
+
 [node name="Level" type="Node"]
+script = ExtResource("1_u05qp")
 
 [node name="TempWalls" parent="." instance=ExtResource("1_y21ek")]
 position = Vector2(0, -1033)
@@ -51,6 +58,12 @@ position = Vector2(579, -431)
 [node name="TempWalls6" parent="." instance=ExtResource("1_y21ek")]
 position = Vector2(685, 632)
 
-[node name="TestEnemy" parent="." instance=ExtResource("3_usxic")]
-position = Vector2(-929, -381)
-RADIUS_OF_DETECTION_SIZE = 400.0
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(-339.789, 273.168)
+scale = Vector2(1.34776, 1.39793)
+curve = SubResource("Curve2D_j7hsw")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+unique_name_in_owner = true
+position = Vector2(-2186, -1752)
+rotation = 0.00316952

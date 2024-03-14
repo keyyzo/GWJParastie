@@ -6,12 +6,6 @@ res://Scenes/gun.tscn
 res://Scenes/rockium.tscn
 res://Scenes/temp_walls.tscn
 res://Scenes/test_enemy.tscn
-res://Scripts/Enemy/IdleState.gd
-res://Scripts/Player/PlayerStateMachine.gd
 res://Scenes/debug_ui.tscn
-res://Scripts/rockium.gd
-res://Scenes/EnemyDebugPanel.gd
-res://Scripts/global.gd
-res://Scripts/Enemy/TestEnemyStateMachine.gd
-res://Scripts/Player/player_controller.gd
+res://Scripts/Enemy/IdleState.gd
 res://Scripts/Enemy/test_enemy_controller.gd

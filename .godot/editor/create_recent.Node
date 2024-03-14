@@ -1,3 +1,5 @@
+PathFollow2D
+Path2D
 Timer
 ProgressBar
 CollisionShape2D
@@ -11,4 +13,3 @@ StaticBody2D
 RigidBody2D
 Marker2D
 CanvasLayer
-ColorRect
