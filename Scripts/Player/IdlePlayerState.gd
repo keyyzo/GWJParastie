@@ -17,6 +17,9 @@ func exit() -> void:
 func update(delta):
 	PLAYER.update_input(SPEED_DEFAULT,ACCELERATION_RATE,DECELERATION_RATE)
 	PLAYER.update_velocity()
+	PLAYER.recharge_stamina()
 
 	if PLAYER.velocity.length() > 0.0:
 		transition.emit("WalkingPlayerState")
+		
+	

@@ -50,6 +50,7 @@ func _on_enemy_hit_box_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_hurtbox"):
 		if area.get_parent().has_method("take_damage"):
 			if can_attack:
+			#if can_attack and !area.get_parent().get_child(2).get_child(3).DASHING:
 				print("player hit")
 				area.get_parent().take_damage(DAMAGE)
 				can_attack = false

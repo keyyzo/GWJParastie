@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/Enemy/IdleState.gd" id="4_g462i"]
 [ext_resource type="Script" path="res://Scripts/Enemy/ChaseState.gd" id="5_5dimq"]
 [ext_resource type="Theme" uid="uid://ci8x0kk14m1ma" path="res://UI/debug.tres" id="6_qlrfv"]
-[ext_resource type="Script" path="res://Scenes/EnemyDebugPanel.gd" id="7_1bd3n"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyDebugPanel.gd" id="7_1bd3n"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7d8g"]
 radius = 11.2944
@@ -33,7 +33,7 @@ corner_radius_bottom_left = 4
 
 [node name="TestEnemy" type="CharacterBody2D" node_paths=PackedStringArray("ATTACK_TIMER", "HITBOX", "AREA_OF_DETECTION", "RADIUS_OF_DETECTION") groups=["test_enemy"]]
 collision_layer = 4
-collision_mask = 9
+collision_mask = 13
 script = ExtResource("1_0d7oq")
 ATTACK_TIMER = NodePath("EnemyHitBox/AttackTimer")
 HITBOX = NodePath("EnemyHitBox")
@@ -52,7 +52,7 @@ texture = ExtResource("1_fh42w")
 
 [node name="TestEnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("CURRENT_STATE")]
 script = ExtResource("3_grgtt")
-CURRENT_STATE = NodePath("IdleState")
+CURRENT_STATE = NodePath("ChaseState")
 
 [node name="IdleState" type="Node" parent="TestEnemyStateMachine" node_paths=PackedStringArray("RANDOM_MOVE_TIMER")]
 script = ExtResource("4_g462i")

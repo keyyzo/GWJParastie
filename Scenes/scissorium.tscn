@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj4iol58m2slc"]
+
+[ext_resource type="Texture2D" uid="uid://dfoospwb8m3sp" path="res://Sprites/scissors.png" id="1_43of1"]
+[ext_resource type="Script" path="res://Scripts/scissorium.gd" id="1_gt6l2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jmsqr"]
+size = Vector2(50, 35)
+
+[node name="Scissorium" type="Node2D"]
+position = Vector2(90, 0)
+rotation = 1.5708
+script = ExtResource("1_gt6l2")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -16.5)
+shape = SubResource("RectangleShape2D_jmsqr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_43of1")

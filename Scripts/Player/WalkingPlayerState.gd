@@ -17,11 +17,17 @@ func exit() -> void:
 func update(delta):
 	PLAYER.update_input(SPEED_DEFAULT,ACCELERATION_RATE,DECELERATION_RATE)
 	PLAYER.update_velocity()
+	PLAYER.recharge_stamina()
 
-	if Input.is_action_pressed("run"):
+	if Input.is_action_pressed("run") and PLAYER.current_stamina > 0:
 		transition.emit("RunningPlayerState")
+	
+	if Input.is_action_just_pressed("dash") and PLAYER.NUMBER_OF_DASHES > 0:
+		transition.emit("DashingPlayerState")
 	
 	if PLAYER.velocity.length() == 0.0:
 		transition.emit("IdlePlayerState")
+		
+	
 		
 	

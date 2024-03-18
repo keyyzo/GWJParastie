@@ -6,16 +6,17 @@ extends Area2D
 @export var PIVOT_POINT : Marker2D
 @export var SHOOTING_POINT : Marker2D
 
-# Gun stat variables
-@export var FIRE_RATE : float = 1.0
+# Rockium stat variables
+@export var ROCKIUM_FIRE_RATE : float = 1.0
 @export var SPEED_OF_BULLET : float = 5.0
-@export var DAMAGE : int = 1
+@export var ROCKIUM_DAMAGE : int = 1
 
 var can_fire : bool = true
 @export var BULLET_TIMER : Timer
 
 # Bullets to load
 @onready var ROCKIUM = preload("res://Scenes/rockium.tscn")
+@onready var SCISSORIUM = preload("res://Scenes/scissorium.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -37,9 +38,14 @@ func shoot():
 	bullet.position = SHOOTING_POINT.global_position
 	bullet.rotation = PIVOT_POINT.rotation
 	get_tree().get_root().add_child(bullet)
-	bullet.bullet_fired(SPEED_OF_BULLET,DAMAGE)
-	BULLET_TIMER.start(FIRE_RATE)
+	bullet.bullet_fired(SPEED_OF_BULLET,ROCKIUM_DAMAGE)
+	BULLET_TIMER.start(ROCKIUM_FIRE_RATE)
 	
+func melee():
+	pass
+	
+func area_of_effect():
+	pass
 
 
 func _on_timer_timeout() -> void:

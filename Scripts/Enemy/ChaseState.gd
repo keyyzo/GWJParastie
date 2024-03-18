@@ -14,13 +14,15 @@ func exit() -> void:
 	pass
 
 func update(delta):
-	TEST_ENEMY.update_velocity()
 	
 	chase()
+	TEST_ENEMY.update_velocity()
+	
+	
 	
 func chase():
 	
-	var direction := TEST_ENEMY.global_position.direction_to(Global.player.global_position)
+	var direction = TEST_ENEMY.global_position.direction_to(Global.player.global_position)
 	if direction:
 		TEST_ENEMY.velocity += direction * ACCELERATION_RATE
 		
@@ -32,5 +34,6 @@ func chase():
 
 
 func _on_detection_area_body_exited(body: Node2D) -> void:
-	print("player out of reach - going to search")
-	transition.emit("IdleState")
+	pass
+	#print("player out of reach - going to search")
+	#transition.emit("IdleState")

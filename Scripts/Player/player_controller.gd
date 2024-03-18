@@ -18,6 +18,17 @@ var mouse_position = Vector2()
 @export var HURTBOX : Area2D
 var current_health : int
 
+# Dash variables to be used within the DashingPlayerState
+@export var NUMBER_OF_DASHES : int = 2
+@export var DASH_LENGTH_TIME : float = 0.30
+
+# Running variables to be used within the RunningPlayerState
+@export var STAMINA_POINTS : float = 100.0
+@export var STAMINA_RECHARGE_RATE : float = 0.2
+@export var STAMINA_USE_RATE : float = 0.5
+var current_stamina = STAMINA_POINTS
+
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("close"):
 		get_tree().quit()
@@ -50,4 +61,7 @@ func update_velocity() -> void:
 func take_damage(damage_taken : int):
 	current_health -= damage_taken
 	%HealthBar.value = current_health
+	
+func recharge_stamina():
+	current_stamina += STAMINA_RECHARGE_RATE
 	

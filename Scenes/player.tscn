@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bvolo3kio7hvp"]
+[gd_scene load_steps=13 format=3 uid="uid://bvolo3kio7hvp"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player_controller.gd" id="1_gm0ng"]
 [ext_resource type="Texture2D" uid="uid://dtk8wj6d5rvfc" path="res://Sprites/temp_char_2.png" id="1_lwvrf"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/IdlePlayerState.gd" id="4_av1ch"]
 [ext_resource type="Script" path="res://Scripts/Player/WalkingPlayerState.gd" id="5_8yyb6"]
 [ext_resource type="Script" path="res://Scripts/Player/RunningPlayerState.gd" id="6_ns4y7"]
+[ext_resource type="Script" path="res://Scripts/Player/DashingPlayerState.gd" id="7_ipt4f"]
 [ext_resource type="PackedScene" uid="uid://v1miwbw5jmvy" path="res://Scenes/gun.tscn" id="9_ttvqj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4b1el"]
@@ -63,6 +64,13 @@ DECELERATION_RATE = 30.0
 [node name="RunningPlayerState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("6_ns4y7")
 
+[node name="DashingPlayerState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("DASH_TIMER", "HURTBOX")]
+script = ExtResource("7_ipt4f")
+DASH_TIMER = NodePath("DashLength")
+HURTBOX = NodePath("../../Hurtbox")
+
+[node name="DashLength" type="Timer" parent="PlayerStateMachine/DashingPlayerState"]
+
 [node name="PlayerCamera" type="Camera2D" parent="."]
 zoom = Vector2(0.4, 0.4)
 position_smoothing_enabled = true
@@ -90,3 +98,5 @@ theme_override_styles/background = SubResource("StyleBoxFlat_0hbgn")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wsywm")
 value = 100.0
 show_percentage = false
+
+[connection signal="timeout" from="PlayerStateMachine/DashingPlayerState/DashLength" to="PlayerStateMachine/DashingPlayerState" method="_on_dash_length_timeout"]
