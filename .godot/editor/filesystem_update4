@@ -7,12 +7,5 @@ res://Scenes/rockium.tscn
 res://Scenes/temp_walls.tscn
 res://Scenes/test_enemy.tscn
 res://Scenes/debug_ui.tscn
-res://Scripts/Player/DashingPlayerState.gd
-res://Scripts/Player/player_controller.gd
-res://Scripts/Player/RunningPlayerState.gd
-res://Scripts/Player/WalkingPlayerState.gd
-res://Scripts/Enemy/test_enemy_controller.gd
-res://Scripts/Player/IdlePlayerState.gd
-res://Scripts/gun.gd
 res://Scenes/scissorium.tscn
 res://Scripts/scissorium.gd

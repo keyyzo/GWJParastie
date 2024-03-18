@@ -32,7 +32,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [node name="TestEnemy" type="CharacterBody2D" node_paths=PackedStringArray("ATTACK_TIMER", "HITBOX", "AREA_OF_DETECTION", "RADIUS_OF_DETECTION") groups=["test_enemy"]]
-collision_layer = 4
+collision_layer = 132
 collision_mask = 13
 script = ExtResource("1_0d7oq")
 ATTACK_TIMER = NodePath("EnemyHitBox/AttackTimer")

@@ -1,24 +1,146 @@
-[gd_scene load_steps=4 format=3 uid="uid://dj4iol58m2slc"]
+[gd_scene load_steps=7 format=3 uid="uid://dj4iol58m2slc"]
 
 [ext_resource type="Texture2D" uid="uid://dfoospwb8m3sp" path="res://Sprites/scissors.png" id="1_43of1"]
 [ext_resource type="Script" path="res://Scripts/scissorium.gd" id="1_gt6l2"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jmsqr"]
-size = Vector2(50, 35)
+[sub_resource type="Animation" id="Animation_jl84t"]
+resource_name = "Attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PivotPoint/Hitbox:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.31, 0.62),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PivotPoint/Hitbox/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.00217629, 0.3, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(8.74228e-07, 20), Vector2(0, -175), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PivotPoint/Hitbox/Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(1.5, 1.5), Vector2(2.5, 2.5), Vector2(2, 2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PivotPoint/Hitbox/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -15), Vector2(0, 4), Vector2(0, -190), Vector2(0, -15)]
+}
 
-[node name="Scissorium" type="Node2D"]
+[sub_resource type="Animation" id="Animation_pr4kw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PivotPoint/Hitbox:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PivotPoint/Hitbox/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PivotPoint/Hitbox/Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PivotPoint/Hitbox/CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.500002, -15)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qjb0f"]
+_data = {
+"Attack": SubResource("Animation_jl84t"),
+"RESET": SubResource("Animation_pr4kw")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jmsqr"]
+size = Vector2(63, 32)
+
+[node name="Scissorium" type="Node2D" node_paths=PackedStringArray("PIVOT_POINT", "HITBOX", "SCISSORIUM_ANIMATION_PLAYER")]
+script = ExtResource("1_gt6l2")
+PIVOT_POINT = NodePath("PivotPoint")
+HITBOX = NodePath("PivotPoint/Hitbox")
+SCISSORIUM_ANIMATION_PLAYER = NodePath("ScissoriumAnimations")
+
+[node name="ScissoriumAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qjb0f")
+}
+
+[node name="PivotPoint" type="Node2D" parent="."]
+
+[node name="Hitbox" type="Area2D" parent="PivotPoint"]
 position = Vector2(90, 0)
 rotation = 1.5708
-script = ExtResource("1_gt6l2")
-
-[node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 128
+monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(0, -16.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PivotPoint/Hitbox"]
+position = Vector2(-0.500002, -15)
 shape = SubResource("RectangleShape2D_jmsqr")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="PivotPoint/Hitbox"]
 scale = Vector2(2, 2)
 texture = ExtResource("1_43of1")
+
+[connection signal="animation_finished" from="ScissoriumAnimations" to="." method="_on_scissorium_animations_animation_finished"]
+[connection signal="body_entered" from="PivotPoint/Hitbox" to="." method="_on_hitbox_body_entered"]

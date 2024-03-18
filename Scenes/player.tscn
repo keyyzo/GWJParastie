@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/WalkingPlayerState.gd" id="5_8yyb6"]
 [ext_resource type="Script" path="res://Scripts/Player/RunningPlayerState.gd" id="6_ns4y7"]
 [ext_resource type="Script" path="res://Scripts/Player/DashingPlayerState.gd" id="7_ipt4f"]
-[ext_resource type="PackedScene" uid="uid://v1miwbw5jmvy" path="res://Scenes/gun.tscn" id="9_ttvqj"]
+[ext_resource type="PackedScene" uid="uid://dj4iol58m2slc" path="res://Scenes/scissorium.tscn" id="9_3g6f5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4b1el"]
 size = Vector2(18.8, 32)
@@ -76,9 +76,6 @@ zoom = Vector2(0.4, 0.4)
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
 
-[node name="Gun" parent="." instance=ExtResource("9_ttvqj")]
-z_index = 3
-
 [node name="Hurtbox" type="Area2D" parent="." groups=["player_hurtbox"]]
 collision_layer = 64
 collision_mask = 32
@@ -98,5 +95,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_0hbgn")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wsywm")
 value = 100.0
 show_percentage = false
+
+[node name="Scissorium" parent="." instance=ExtResource("9_3g6f5")]
 
 [connection signal="timeout" from="PlayerStateMachine/DashingPlayerState/DashLength" to="PlayerStateMachine/DashingPlayerState" method="_on_dash_length_timeout"]
