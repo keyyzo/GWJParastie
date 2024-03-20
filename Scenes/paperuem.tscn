@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://db40laaew18s0"]
+
+[ext_resource type="Texture2D" uid="uid://dhyyyudddu267" path="res://Sprites/paper.png" id="1_n4l33"]
+[ext_resource type="Script" path="res://Scripts/paperuem.gd" id="1_ocxq4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqkiy"]
+size = Vector2(60, 63)
+
+[node name="Paperuem" type="Node2D" node_paths=PackedStringArray("PIVOT_POINT", "HITBOX", "PAPERUEM_ANIMATION_PLAYER")]
+script = ExtResource("1_ocxq4")
+PIVOT_POINT = NodePath("PivotPoint")
+HITBOX = NodePath("PivotPoint/Hitbox")
+PAPERUEM_ANIMATION_PLAYER = NodePath("PaperuemAnimations")
+
+[node name="PivotPoint" type="Node2D" parent="."]
+
+[node name="Hitbox" type="Area2D" parent="PivotPoint"]
+position = Vector2(90, 0)
+collision_layer = 16
+collision_mask = 141
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PivotPoint/Hitbox"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_lqkiy")
+
+[node name="Sprite2D" type="Sprite2D" parent="PivotPoint/Hitbox"]
+scale = Vector2(2, 2)
+texture = ExtResource("1_n4l33")
+
+[node name="PaperuemAnimations" type="AnimationPlayer" parent="."]

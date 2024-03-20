@@ -1,5 +1,6 @@
-Node2D
+ProgressBar
 AnimationPlayer
+Node2D
 Sprite2D
 CollisionShape2D
 Area2D
@@ -8,8 +9,6 @@ PlayerMovementState
 Node
 PathFollow2D
 Path2D
-ProgressBar
 TestEnemyMovementState
 State
 CharacterBody2D
-StaticBody2D

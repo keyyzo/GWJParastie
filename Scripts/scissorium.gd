@@ -24,8 +24,6 @@ func _physics_process(delta: float) -> void:
 		can_attack = false
 		SCISSORIUM_ANIMATION_PLAYER.play("Attack")
 		
-	var check_monitoring = HITBOX.is_monitoring()
-	print(check_monitoring)
 		
 func attack():
 	pass

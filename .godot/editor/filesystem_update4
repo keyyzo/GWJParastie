@@ -8,4 +8,8 @@ res://Scenes/temp_walls.tscn
 res://Scenes/test_enemy.tscn
 res://Scenes/debug_ui.tscn
 res://Scenes/scissorium.tscn
+res://Scenes/paperuem.tscn
+res://Scripts/paperuem.gd
 res://Scripts/scissorium.gd
+res://Scripts/Player/player_controller.gd
+res://Scripts/Player/RunningPlayerState.gd

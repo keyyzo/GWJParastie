@@ -28,5 +28,6 @@ func update(delta):
 		transition.emit("IdlePlayerState")
 		
 	PLAYER.current_stamina -= PLAYER.STAMINA_USE_RATE
+	
 		
 

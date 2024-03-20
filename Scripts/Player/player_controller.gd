@@ -27,7 +27,7 @@ var current_health : int
 @export var STAMINA_RECHARGE_RATE : float = 0.2
 @export var STAMINA_USE_RATE : float = 0.5
 var current_stamina = STAMINA_POINTS
-
+var show_stamina : bool = false
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("close"):
@@ -38,9 +38,12 @@ func _ready() -> void:
 	current_health = MAX_HEALTH
 	%HealthBar.max_value = MAX_HEALTH
 	%HealthBar.value = current_health
+	%PlayerStaminaBar.max_value = STAMINA_POINTS
+	%PlayerStaminaBar.value = current_stamina
+	%PlayerStaminaBar.hide()
 
 func _physics_process(delta: float) -> void:
-	pass
+	show_stamina_bar()
 
 func update_input(_speed : float, _acceleration : float, _deceleration : float) -> void:
 	var input_vector = Vector2(Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
@@ -65,3 +68,12 @@ func take_damage(damage_taken : int):
 func recharge_stamina():
 	current_stamina += STAMINA_RECHARGE_RATE
 	
+func show_stamina_bar():
+	%PlayerStaminaBar.value = current_stamina
+	if current_stamina < STAMINA_POINTS and show_stamina == false:
+		show_stamina = true
+		%PlayerStaminaBar.show()
+	elif current_stamina >= STAMINA_POINTS and show_stamina == true:
+		await get_tree().create_timer(2)
+		show_stamina = false
+		%PlayerStaminaBar.hide()
