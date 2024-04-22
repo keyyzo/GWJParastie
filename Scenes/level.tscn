@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cvvfyk6qi0mbd"]
+[gd_scene load_steps=6 format=3 uid="uid://cvvfyk6qi0mbd"]
 
 [ext_resource type="PackedScene" uid="uid://bvolo3kio7hvp" path="res://Scenes/player.tscn" id="1_r7o8c"]
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_u05qp"]
 [ext_resource type="PackedScene" uid="uid://h7d538nsqnfy" path="res://Scenes/temp_walls.tscn" id="1_y21ek"]
 [ext_resource type="PackedScene" uid="uid://d31m6ub3x43vi" path="res://Scenes/debug_ui.tscn" id="4_rmg4k"]
-[ext_resource type="PackedScene" uid="uid://db40laaew18s0" path="res://Scenes/paperuem.tscn" id="5_6k4fr"]
 
 [sub_resource type="Curve2D" id="Curve2D_j7hsw"]
 _data = {
@@ -68,6 +67,3 @@ curve = SubResource("Curve2D_j7hsw")
 unique_name_in_owner = true
 position = Vector2(-2186, -1752)
 rotation = 0.00316952
-
-[node name="Paperuem" parent="." instance=ExtResource("5_6k4fr")]
-position = Vector2(345, -110)

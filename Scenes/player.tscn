@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bvolo3kio7hvp"]
+[gd_scene load_steps=16 format=3 uid="uid://bvolo3kio7hvp"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player_controller.gd" id="1_gm0ng"]
 [ext_resource type="Texture2D" uid="uid://dtk8wj6d5rvfc" path="res://Sprites/temp_char_2.png" id="1_lwvrf"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/RunningPlayerState.gd" id="6_ns4y7"]
 [ext_resource type="Script" path="res://Scripts/Player/DashingPlayerState.gd" id="7_ipt4f"]
 [ext_resource type="PackedScene" uid="uid://dj4iol58m2slc" path="res://Scenes/scissorium.tscn" id="9_3g6f5"]
+[ext_resource type="PackedScene" uid="uid://db40laaew18s0" path="res://Scenes/paperuem.tscn" id="9_kespe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4b1el"]
 size = Vector2(18.8, 32)
@@ -103,6 +104,7 @@ value = 100.0
 show_percentage = false
 
 [node name="Scissorium" parent="." instance=ExtResource("9_3g6f5")]
+visible = false
 
 [node name="PlayerStaminaBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
@@ -114,5 +116,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_7j8dm")
 theme_override_styles/fill = SubResource("StyleBoxFlat_fmyrl")
 value = 100.0
 show_percentage = false
+
+[node name="Paperuem" parent="." instance=ExtResource("9_kespe")]
 
 [connection signal="timeout" from="PlayerStateMachine/DashingPlayerState/DashLength" to="PlayerStateMachine/DashingPlayerState" method="_on_dash_length_timeout"]

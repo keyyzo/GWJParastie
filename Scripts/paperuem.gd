@@ -16,32 +16,80 @@ var can_attack : bool = true
 var is_travelling : bool = false
 var temp_click_pos : Vector2
 var target_destination_reached : bool = false
+var aoe_active : bool = false
 
 @onready var NEW_INSTANCE = load("res://Scenes/paperuem.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	can_attack = true
+	is_travelling = false
+	target_destination_reached = false
+	temp_click_pos = Vector2.ZERO
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	PIVOT_POINT.look_at(get_global_mouse_position())
-
-	if Input.is_action_just_pressed("use_button") and can_attack:
-		if is_travelling != true:
-			temp_click_pos = Vector2(get_global_mouse_position().x - 90.0,get_global_mouse_position().y)
-			is_travelling = true
+	
+	if not is_travelling:
+		PIVOT_POINT.look_at(get_global_mouse_position())
+	if can_attack:
+		if Input.is_action_just_pressed("use_button"):
+			if is_travelling != true:
+				#temp_click_pos = Vector2(get_global_mouse_position().x - 90.0,get_global_mouse_position().y)
+				temp_click_pos = Vector2(get_global_mouse_position().x,get_global_mouse_position().y)
+				
+				if temp_click_pos.x < 0 and temp_click_pos.y > 0:
+					temp_click_pos = Vector2(temp_click_pos.x + 45.0, temp_click_pos.y - 45.0)
+				elif temp_click_pos.x > 0 and temp_click_pos.y > 0:
+					temp_click_pos = Vector2(temp_click_pos.x - 45.0, temp_click_pos.y - 45.0)
+				elif temp_click_pos.x > 0 and temp_click_pos.y < 0:
+					temp_click_pos = Vector2(temp_click_pos.x - 45.0, temp_click_pos.y + 45.0)
+				elif temp_click_pos.x < 0 and temp_click_pos.y < 0:
+					temp_click_pos = Vector2(temp_click_pos.x + 45.0, temp_click_pos.y + 45.0)
+				
+				is_travelling = true
 			
 	travel_to_attack_point(temp_click_pos,delta)
 func aoe_attack():
 	pass
 	
+func aiming_paperuem():
+	PIVOT_POINT.look_at(get_global_mouse_position())
+	
+func fire_paperuem():
+	if Input.is_action_just_pressed("use_button"):
+			if is_travelling != true:
+				#temp_click_pos = Vector2(get_global_mouse_position().x - 90.0,get_global_mouse_position().y)
+				temp_click_pos = Vector2(get_global_mouse_position().x,get_global_mouse_position().y)
+				if temp_click_pos.x < 0 and temp_click_pos.y > 0:
+					temp_click_pos = Vector2(temp_click_pos.x + 45.0, temp_click_pos.y - 45.0)
+				elif temp_click_pos.x > 0 and temp_click_pos.y > 0:
+					temp_click_pos = Vector2(temp_click_pos.x - 45.0, temp_click_pos.y - 45.0)
+				elif temp_click_pos.x > 0 and temp_click_pos.y < 0:
+					temp_click_pos = Vector2(temp_click_pos.x - 45.0, temp_click_pos.y + 45.0)
+				elif temp_click_pos.x < 0 and temp_click_pos.y < 0:
+					temp_click_pos = Vector2(temp_click_pos.x + 45.0, temp_click_pos.y + 45.0)
+				
+					
+				is_travelling = true
+	
 func travel_to_attack_point(attack_pos:Vector2, delta:float):
 	if is_travelling:
+		reparent(get_tree().get_root(),true)
 		global_position = global_position.move_toward(attack_pos,ATTACK_TRAVEL_SPEED * delta)
-	if global_position == attack_pos:
-		is_travelling = false
+		if global_position == attack_pos:
+			target_destination_reached = true
+			can_attack = false
+			PAPERUEM_ANIMATION_PLAYER.play("Attack")
 		
 func spawn_new_paperuem():
-	get_parent().add_child(NEW_INSTANCE.instantiate())
+	Global.player.add_child(NEW_INSTANCE.instantiate())
+	
+
+
+
+func _on_paperuem_animations_animation_finished(anim_name: StringName) -> void:
+	
+	spawn_new_paperuem()
+	queue_free()
+	

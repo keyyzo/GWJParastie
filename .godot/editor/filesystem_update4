@@ -1,6 +1,7 @@
-res://Scenes/level.tscn
+res://Scenes/paperuem.tscn
 res://UI/new_style_box_flat.tres
 res://UI/debug.tres
+res://Scenes/level.tscn
 res://Scenes/player.tscn
 res://Scenes/gun.tscn
 res://Scenes/rockium.tscn
@@ -8,8 +9,4 @@ res://Scenes/temp_walls.tscn
 res://Scenes/test_enemy.tscn
 res://Scenes/debug_ui.tscn
 res://Scenes/scissorium.tscn
-res://Scenes/paperuem.tscn
 res://Scripts/paperuem.gd
-res://Scripts/scissorium.gd
-res://Scripts/Player/player_controller.gd
-res://Scripts/Player/RunningPlayerState.gd
